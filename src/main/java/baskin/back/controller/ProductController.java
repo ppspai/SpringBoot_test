@@ -2,6 +2,7 @@ package baskin.back.controller;
 
 
 import baskin.back.domain.Product;
+import baskin.back.domain.ProductDTO;
 import baskin.back.service.ProductService;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.querydsl.core.Tuple;
@@ -31,12 +32,11 @@ public class ProductController {
         return product;
     }
 
-//    @GetMapping("")
-//    public List<Tuple> findAll() {
-//        List<Tuple> abc = productService.findAll();
-//        System.out.println(abc);
-//        return abc;
-//    }
+    @GetMapping("")
+    public List<ProductDTO> findAll() {
+        List<ProductDTO> abc = productService.findAll();
+        return abc;
+    }
 
     @GetMapping("search")
     public List<Product> findbyName(@RequestParam("name")String name){

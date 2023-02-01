@@ -19,7 +19,7 @@ public class UsersController {
 
     @PostMapping("signUp")
     @ResponseBody
-    // cors 설정 뚫음, 보안엔 안좋음, To DO
+    // cors 설정 뚫음, 보안엔 안좋음, TODO
     @CrossOrigin("*")
     public String signUp(@RequestBody Users users){
         System.out.println(users.getName());

@@ -1,12 +1,15 @@
 package baskin.back.service;
 
 
+import baskin.back.Mapper.ProductMapper;
 import baskin.back.domain.Product;
+import baskin.back.domain.ProductDTO;
 import baskin.back.repository.ProductRepository;
 import baskin.back.repository.ProductRepositorySupport;
-import com.querydsl.core.Tuple;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductRepositorySupport productRepositorySupport;
+    @Autowired
+    ProductMapper productMapper;
 
     public ProductService(ProductRepository productRepository, ProductRepositorySupport productRepositorySupport){
         this.productRepository = productRepository;
@@ -29,10 +34,10 @@ public class ProductService {
         return product;
     }
 
-//    public List<Tuple> findAll() {
-//        List<Tuple> productList = productRepositorySupport.testJoin();
-//        return productList;
-//    }
+    public List<ProductDTO> findAll() {
+        List<ProductDTO> productList = productMapper.findAll();
+        return productList;
+    }
 
     public List<Product> findbyName(String name) {
         return productRepository.findBynameContaining(name);
