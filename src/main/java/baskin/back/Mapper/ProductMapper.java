@@ -14,4 +14,6 @@ import java.util.List;
 public interface ProductMapper {
     List<ProductDTO> findAll();
     List<ProductDTO> findByName(String name);
+
+    List<ProductDTO> findById(Long id);
 }

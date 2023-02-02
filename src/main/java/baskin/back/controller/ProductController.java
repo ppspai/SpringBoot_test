@@ -1,11 +1,14 @@
 package baskin.back.controller;
 
 
+import baskin.back.DTO.ProductFilterDTO;
+import baskin.back.Mapper.ProductFilterMapper;
 import baskin.back.domain.Product;
 import baskin.back.DTO.ProductDTO;
 import baskin.back.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,20 +28,26 @@ public class ProductController {
     }
     
     @GetMapping("{id}")
-    public Optional<Product> findById(@PathVariable Long id) {
-        Optional<Product> product = productService.findById(id);
+    public List<ProductDTO> findById(@PathVariable Long id) {
+        List<ProductDTO> product = productService.findById(id);
         return product;
     }
 
-    @GetMapping("")
+    @GetMapping("all")
     public List<ProductDTO> findAll() {
-        List<ProductDTO> abc = productService.findAll();
-        return abc;
+        List<ProductDTO> productlist = productService.findAll();
+        return productlist;
     }
 
-    @GetMapping("search")
+    @GetMapping("")
     public List<ProductDTO> findById(@RequestParam("name")String name){
         return productService.findByName(name);
     }
+
+    @PostMapping("filter")
+    public List<ProductFilterDTO> test(@RequestBody HashMap<String, Object> param){
+        return productService.findProductByFilter(param);
+    }
+
 
 }

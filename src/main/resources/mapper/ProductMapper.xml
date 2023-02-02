@@ -41,6 +41,47 @@
         ORDER BY product.id
     </select>
 
+    <select id="findById" resultType="baskin.back.DTO.ProductDTO">
+        SELECT
+            product.id,
+            product.name,
+            product.en_name,
+            category.category_name,
+            product.description,
+            product.kcal,
+            product.salt,
+            product.sugar,
+            product.fat,
+            product.protein,
+            product.caffeine,
+            product.img_url,
+            tag.tag_name,
+            allergy.allergy_name
+        FROM
+            product
+                LEFT JOIN category ON product.category_id = category.id
+                LEFT JOIN (SELECT
+                               product.id AS id,
+                               array_agg(allergy.allergy_name) AS allergy_name
+                           FROM
+                               product
+                                   LEFT JOIN productallergy ON product.id = productallergy.productid
+                                   LEFT JOIN allergy ON productallergy.allergyid = allergy.id
+                           GROUP BY product.id) as allergy ON product.id = allergy.id
+                LEFT JOIN (SELECT
+                               product.id AS id,
+                               array_agg(tag.tag_name) AS tag_name
+                           FROM
+                               product
+                                   LEFT JOIN producttag ON product.id = producttag.product_id
+                                   LEFT JOIN tag ON producttag.tag_id = tag.id
+                           GROUP BY product.id) as tag ON product.id = tag.id
+        <where>
+            <if test="id != null">product.id = #{id}</if>
+        </where>
+        ORDER BY product.id
+    </select>
+
     <select id="findByName" resultType="baskin.back.DTO.ProductDTO">
         SELECT
             product.id,
@@ -59,32 +100,27 @@
             allergy.allergy_name
         FROM
             product
-
-                LEFT JOIN category ON product.category_id = category.id
-                LEFT JOIN (SELECT
-                               product.id AS id,
-                               array_agg(allergy.allergy_name) AS allergy_name
-                           FROM
-                               product
-                                   LEFT JOIN productallergy ON product.id = productallergy.productid
-                                   LEFT JOIN allergy ON productallergy.allergyid = allergy.id
-                           GROUP BY product.id) as allergy ON product.id = allergy.id
-                LEFT JOIN (SELECT
-                               product.id AS id,
-                               array_agg(tag.tag_name) AS tag_name
-                           FROM
-                               product
-                                   LEFT JOIN producttag ON product.id = producttag.product_id
-                                   LEFT JOIN tag ON producttag.tag_id = tag.id
-                           GROUP BY product.id) as tag ON product.id = tag.id
+        LEFT JOIN category ON product.category_id = category.id
+        LEFT JOIN (SELECT
+                        product.id AS id,
+                        array_agg(allergy.allergy_name) AS allergy_name
+                    FROM
+                        product
+                    LEFT JOIN productallergy ON product.id = productallergy.productid
+                    LEFT JOIN allergy ON productallergy.allergyid = allergy.id
+                    GROUP BY product.id) as allergy ON product.id = allergy.id
+        LEFT JOIN (SELECT
+                        product.id AS id,
+                        array_agg(tag.tag_name) AS tag_name
+                    FROM
+                            product
+                    LEFT JOIN producttag ON product.id = producttag.product_id
+                    LEFT JOIN tag ON producttag.tag_id = tag.id
+                    GROUP BY product.id) as tag ON product.id = tag.id
     <bind name="names" value="'%'+name+'%'"/>
     <where>
         <if test = "name != null">AND product.name like #{names}</if>
     </where>
         ORDER BY product.id
-    </select>
-
-    <select id = "findProductFilter">
-
     </select>
 </mapper>
