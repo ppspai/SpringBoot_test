@@ -1,4 +1,4 @@
-package baskin.back.domain;
+package baskin.back.DTO;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.Getter;

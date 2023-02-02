@@ -2,10 +2,8 @@ package baskin.back.controller;
 
 
 import baskin.back.domain.Product;
-import baskin.back.domain.ProductDTO;
+import baskin.back.DTO.ProductDTO;
 import baskin.back.service.ProductService;
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.querydsl.core.Tuple;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,10 +36,15 @@ public class ProductController {
         return abc;
     }
 
-    @GetMapping("search")
-    public List<Product> findbyName(@RequestParam("name")String name){
-        return productService.findbyName(name);
-    }
+//    @GetMapping("search")
+//    public List<Product> findbyName(@RequestParam("name")String name){
+//        return productService.findbyName(name);
+//    }
 
+    @GetMapping("search")
+    public List<ProductDTO> findById(@RequestParam("name")String name){
+        System.out.println(name);
+        return productService.findByName(name);
+    }
 
 }
