@@ -22,12 +22,6 @@ public class UsersController {
     // cors 설정 뚫음, 보안엔 안좋음, TODO
     @CrossOrigin("*")
     public String signUp(@RequestBody Users users){
-        System.out.println(users.getName());
-        System.out.println(users.getUser_id());
-        System.out.println(users.getUser_pw());
-        System.out.println(users.getBirth());
-        System.out.println(users.getEmail());
-        System.out.println(users.getPhone_number());
         usersService.signUp(users.getName(), users.getUser_id(), users.getUser_pw(), users.getBirth(), users.getEmail(), users.getPhone_number());
         return "회원가입이 완료 되었습니다.";
     }
@@ -41,8 +35,10 @@ public class UsersController {
 
     @PostMapping("login")
     @ResponseBody
+    @CrossOrigin("*")
     public Users login(@RequestBody Users users){
-        return usersService.login(users.getUser_id(), users.getUser_pw());
+        Users user =usersService.login(users.getUser_id(), users.getUser_pw());
+        return user;
     }
 
 }

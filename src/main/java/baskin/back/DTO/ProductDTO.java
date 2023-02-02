@@ -1,13 +1,8 @@
 package baskin.back.DTO;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.mapping.Array;
-import org.hibernate.mapping.List;
-
-import java.util.ArrayList;
 
 @Getter
 @Setter

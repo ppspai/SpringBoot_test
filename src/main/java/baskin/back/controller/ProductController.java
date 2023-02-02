@@ -36,14 +36,8 @@ public class ProductController {
         return abc;
     }
 
-//    @GetMapping("search")
-//    public List<Product> findbyName(@RequestParam("name")String name){
-//        return productService.findbyName(name);
-//    }
-
     @GetMapping("search")
     public List<ProductDTO> findById(@RequestParam("name")String name){
-        System.out.println(name);
         return productService.findByName(name);
     }
 
