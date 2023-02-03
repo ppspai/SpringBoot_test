@@ -44,6 +44,7 @@ public class ProductController {
         return productService.findByName(name);
     }
 
+    @CrossOrigin("*")
     @PostMapping("filter")
     public List<ProductFilterDTO> test(@RequestBody HashMap<String, Object> param){
         return productService.findProductByFilter(param);

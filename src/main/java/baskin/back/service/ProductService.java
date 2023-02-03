@@ -45,7 +45,6 @@ public class ProductService {
     }
 
     public List<ProductFilterDTO> findProductByFilter(HashMap param) {
-        System.out.println(param);
         List<ProductFilterDTO> productList = productFilterMapper.findProductByFilter(param);
         if (param.get("allergy") != null) {
             String[] a = param.get("allergy").toString().split(",");
