@@ -12,19 +12,20 @@ import javax.transaction.Transactional;
 
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "Insert Into users (name, user_id, user_pw, birth, email, phone_number) VALUES (:name, :user_id, :user_pw, :birth, :email, :phone_number)", nativeQuery = true)
-    public void signUp(@Param("name")String name, @Param("user_id")String user_id, @Param("user_pw")String user_pw, @Param("birth")Long birth, @Param("email")String email, @Param("phone_number")String phone_number);
+//    @Transactional
+//    @Modifying
+//    @Query(value = "Insert Into users (name, userid, userpw, birth, email, phoneNumber) VALUES (:name, :user_id, :user_pw, :birth, :email, :phaoneNumber)", nativeQuery = true)
+//    public void signUp(@Param("name")String name, @Param("userid")String user_id, @Param("userpw")String userpw, @Param("birth")Long birth, @Param("email")String email, @Param("phoneNumber")String phoneNumber);
+
 
 
     public List<Users> findAll();
 
-    @Query(value = "SELECT * FROM users WHERE user_id = :user_id", nativeQuery = true)
-    public Users existUser(@Param("user_id")String user_id);
+    @Query(value = "SELECT * FROM users WHERE userid = :userid", nativeQuery = true)
+    public Users existUser(@Param("userid")String userid);
 
 
-    @Query(value = "SELECT * FROM users WHERE user_id = :user_id AND user_pw = :user_pw", nativeQuery = true)
-    public Users login(@Param("user_id")String user_id, @Param("user_pw")String user_pw);
+    @Query(value = "SELECT * FROM users WHERE userid = :userid AND userpw = :userpw", nativeQuery = true)
+    public Users login(@Param("userid")String userid, @Param("userpw")String userpw);
 
 }

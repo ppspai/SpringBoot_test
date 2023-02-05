@@ -33,21 +33,4 @@ public class Product {
     private int caffeine;
     private String img_Url;
 
-
-//    @OneToOne
-//    @JoinColumn(name = "id")
-//    private Category category;
-//
-//    @ManyToMany
-//    @JoinTable(name = "Allergy",
-//                joinColumns = @JoinColumn(name = "id"),
-//                inverseJoinColumns = @JoinColumn(name = "allergy_Id"))
-//    private List<ProductAllergy> ProductAllergy;
-//
-//    @ManyToMany
-//    @JoinTable(name = "Tag",
-//                joinColumns = @JoinColumn(name = "id"),
-//                inverseJoinColumns = @JoinColumn(name = "tag_Id"))
-//    private List<Producttag> Producttag;
-
 }

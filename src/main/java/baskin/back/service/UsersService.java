@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@Transactional
 public class UsersService {
     private final UsersRepository usersRepository;
 
@@ -18,28 +18,27 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
-    public void signUp(String name, String user_id, String user_pw, Long birth, String email, String phone_number){
+    public void signUp(Users users){
         try {
-            // 비밀번호 암호화 해서 DB에 저장
-            user_pw = hashedPassword(user_pw);
-
-            if (usersRepository.existUser(user_id) != null) {
-                throw new Error("중복되는 아이디입니다.");
-            } else {
-                usersRepository.signUp(name, user_id, user_pw, birth, email, phone_number);
+            if(usersRepository.existUser(users.getUserid()) != null) {
+                throw new Error("이미 존재하는 ID입니다.");
             }
-        } catch(Exception e) {
+            String user_pw = hashedPassword(users.getUserpw());
+            users.setUserpw(user_pw);
+            usersRepository.save(users);
+        } catch(Exception e){
             e.printStackTrace();
         }
+
     }
 
-    public Users login(String user_id, String user_pw){
+    public Users login(String userid, String userpw){
         try{
-            Users users = usersRepository.existUser(user_id);
+            Users users = usersRepository.existUser(userid);
             if(users == null) {
                 throw new Error("일치하는 아이디가 없습니다.");
                 // 입력한 비밀번호와 암호화된 비밀번호 해독 후 비교
-            } else if (!checkPass(user_pw, users.getUser_pw())){
+            } else if (!checkPass(userpw, users.getUserpw())){
                 throw new Error("비밀번호가 틀렸습니다.");
             } else {
                 return users;
@@ -49,6 +48,11 @@ public class UsersService {
         }  
         return null;
         
+    }
+
+    public Users existUser(String userid){
+        Users user = usersRepository.existUser(userid);
+        return user;
     }
 
     public List<Users> findAll() {

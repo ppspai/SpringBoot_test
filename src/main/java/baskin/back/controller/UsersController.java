@@ -17,13 +17,11 @@ public class UsersController {
         this.usersService = usersService;
     }
 
+
     @PostMapping("signUp")
-    @ResponseBody
-    // cors 설정 뚫음, 보안엔 안좋음, TODO
-    @CrossOrigin("*")
-    public String signUp(@RequestBody Users users){
-        usersService.signUp(users.getName(), users.getUser_id(), users.getUser_pw(), users.getBirth(), users.getEmail(), users.getPhone_number());
-        return "회원가입이 완료 되었습니다.";
+    public String test(@RequestBody Users users){
+        usersService.signUp(users);
+        return "회원가입 완료";
     }
 
     @GetMapping("findAll")
@@ -33,11 +31,22 @@ public class UsersController {
         return allUsers;
     }
 
+    @PostMapping("existUser")
+    public boolean existUser(@RequestBody Users users) {
+        System.out.println(users);
+        if (usersService.existUser(users.getUserid()) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     @PostMapping("login")
     @ResponseBody
     @CrossOrigin("*")
     public Users login(@RequestBody Users users){
-        Users user =usersService.login(users.getUser_id(), users.getUser_pw());
+        Users user =usersService.login(users.getUserid(), users.getUserpw());
         return user;
     }
 

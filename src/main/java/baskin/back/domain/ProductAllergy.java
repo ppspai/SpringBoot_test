@@ -19,13 +19,8 @@ public class ProductAllergy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
     private Long product_id;
-    @NotNull
+
     private Long allergy_id;
-
-
-//    @OneToMany
-//    @JoinColumn(name = "id")
-//    private List<Allergy> allergyList;
 }

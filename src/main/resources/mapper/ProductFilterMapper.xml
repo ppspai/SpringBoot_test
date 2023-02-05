@@ -21,8 +21,8 @@
                         array_agg(allergy.allergy_name) AS allergy_name
                     FROM
                         product
-                    LEFT JOIN productallergy ON product.id = productallergy.productid
-                    LEFT JOIN allergy ON productallergy.allergyid = allergy.id
+                    LEFT JOIN productallergy ON product.id = productallergy.product_id
+                    LEFT JOIN allergy ON productallergy.allergy_id = allergy.id
                     GROUP BY product.id) as allergy ON product.id = allergy.id
 
         <where>

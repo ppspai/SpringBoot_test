@@ -19,12 +19,8 @@ public class Producttag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    private Long product_id;
-    @NotNull
-    private Long tag_id;
 
-//    @OneToMany
-//    @JoinColumn(name = "id")
-//    private List<Tag> tagList;
+    private Long product_id;
+
+    private Long tag_id;
 }

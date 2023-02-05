@@ -24,17 +24,11 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@NotNull
     private String name;
-	@NotNull
-    private String user_id;
-	@NotNull
-    private String user_pw;
-	@NotNull
+    private String userid;
+    private String userpw;
     private Long birth;
-	@NotNull
     private String email;
-	@NotNull
-    private String phone_number;
+    private String phoneNumber;
 
 }

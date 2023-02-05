@@ -6,6 +6,8 @@ import baskin.back.Mapper.ProductFilterMapper;
 import baskin.back.domain.Product;
 import baskin.back.DTO.ProductDTO;
 import baskin.back.service.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,9 +36,10 @@ public class ProductController {
     }
 
     @GetMapping("all")
-    public List<ProductDTO> findAll() {
+    public ResponseEntity<List<ProductDTO>> findAll() {
         List<ProductDTO> productlist = productService.findAll();
-        return productlist;
+
+        return new ResponseEntity<>(productlist, HttpStatus.OK);
     }
 
     @GetMapping("")
