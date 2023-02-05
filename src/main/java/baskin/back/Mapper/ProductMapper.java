@@ -15,5 +15,5 @@ public interface ProductMapper {
     List<ProductDTO> findAll();
     List<ProductDTO> findByName(String name);
 
-    List<ProductDTO> findById(Long id);
+    ProductDTO findById(Long id);
 }

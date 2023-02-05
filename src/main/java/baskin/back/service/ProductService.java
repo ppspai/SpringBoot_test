@@ -1,6 +1,7 @@
 package baskin.back.service;
 
 
+import baskin.back.CustomException;
 import baskin.back.DTO.ProductFilterDTO;
 import baskin.back.Mapper.ProductFilterMapper;
 import baskin.back.Mapper.ProductMapper;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static baskin.back.ErrorCode.InvalidParameter;
 
 @Service
 public class ProductService {
@@ -25,12 +28,15 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void createProduct(String ko_name, String en_name, Long category_id, String description, int kcal, int salt, int sugar, int fat, int protein, int caffeine, String img_url) {
-        productRepository.createProduct(ko_name, en_name, category_id, description, kcal, salt, sugar, fat, protein, caffeine, img_url);
+    public void createProduct(Product product) {
+        productRepository.save(product);
     }
 
-    public List<ProductDTO> findById(Long id){
-        List<ProductDTO> product = productMapper.findById(id);
+    public ProductDTO findById(Long id){
+        ProductDTO product = productMapper.findById(id);
+        if(product == null){
+            throw new CustomException(InvalidParameter);
+        }
         return product;
     }
 
@@ -41,7 +47,11 @@ public class ProductService {
 
     // 검색기능
     public List<ProductDTO> findByName(String name) {
-        return productMapper.findByName(name);
+        List<ProductDTO> productList = productMapper.findByName(name);
+        if(productList.isEmpty()) {
+            throw new CustomException(InvalidParameter);
+        }
+        return productList;
     }
 
     public List<ProductFilterDTO> findProductByFilter(HashMap param) {
@@ -57,12 +67,15 @@ public class ProductService {
                     }
                 }
             }
+            if(clone.isEmpty()){
+                throw new CustomException(InvalidParameter);
+            }
             return clone;
         } else {
+            if(productList.isEmpty()){
+                throw new CustomException(InvalidParameter);
+            }
             return productList;
         }
     }
-
-
-    
 }

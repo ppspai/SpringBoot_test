@@ -6,12 +6,14 @@ import baskin.back.Mapper.ProductFilterMapper;
 import baskin.back.domain.Product;
 import baskin.back.DTO.ProductDTO;
 import baskin.back.service.ProductService;
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -24,33 +26,47 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public String createProduct(@RequestBody Product product) {
-        productService.createProduct(product.getName(), product.getEnName(), product.getCategory_Id(), product.getDescription(), product.getKcal(), product.getSalt(), product.getSugar(), product.getFat(), product.getProtein(), product.getCaffeine(), product.getImg_Url());
-        return "CREATE_DONE";
+    public ResponseEntity<Map<String, Object>> createProduct(@RequestBody Product product) {
+        productService.createProduct(product);
+        Map<String, Object> result = new HashMap<>();
+        result.put("message", "CREATE_DONE");
+        return ResponseEntity.ok().body(result);
     }
     
     @GetMapping("{id}")
-    public List<ProductDTO> findById(@PathVariable Long id) {
-        List<ProductDTO> product = productService.findById(id);
-        return product;
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        ProductDTO product = productService.findById(id);
+        Map<String, Object> result = new HashMap<>();
+        result.put("statusCode","200");
+        result.put("data", product);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("all")
-    public ResponseEntity<List<ProductDTO>> findAll() {
-        List<ProductDTO> productlist = productService.findAll();
-
-        return new ResponseEntity<>(productlist, HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> findAll() {
+        List<ProductDTO> productList = productService.findAll();
+        Map<String, Object> result = new HashMap<>();
+        result.put("statusCode", "200");
+        result.put("data", productList);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("")
-    public List<ProductDTO> findById(@RequestParam("name")String name){
-        return productService.findByName(name);
+    public ResponseEntity<Map<String, Object>> findById(@RequestParam("name")String name){
+        List<ProductDTO> productList = productService.findByName(name);
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", productList);
+
+        return ResponseEntity.ok().body(result);
     }
 
     @CrossOrigin("*")
     @PostMapping("filter")
-    public List<ProductFilterDTO> test(@RequestBody HashMap<String, Object> param){
-        return productService.findProductByFilter(param);
+    public ResponseEntity<Map<String, Object>> findProductByFilter(@RequestBody HashMap<String, Object> param){
+        List<ProductFilterDTO> productList = productService.findProductByFilter(param);
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", productList);
+        return ResponseEntity.ok().body(result);
     }
 
 
