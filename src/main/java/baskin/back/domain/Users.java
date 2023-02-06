@@ -31,7 +31,7 @@ public class Users {
     private String userid;
     @NotBlank
     private String userpw;
-    @NotBlank
+
     private Long birth;
     @NotBlank
     private String email;

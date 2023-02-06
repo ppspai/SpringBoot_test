@@ -24,6 +24,11 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "SELECT * FROM users WHERE userid = :userid", nativeQuery = true)
     public Users existUser(@Param("userid")String userid);
 
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM users WHERE userid = :userid", nativeQuery = true)
+    public void deleteUser(@Param("userid")String userid);
+
 
     @Query(value = "SELECT * FROM users WHERE userid = :userid AND userpw = :userpw", nativeQuery = true)
     public Users login(@Param("userid")String userid, @Param("userpw")String userpw);

@@ -29,6 +29,7 @@ public class ProductController {
     public ResponseEntity<Map<String, Object>> createProduct(@RequestBody Product product) {
         productService.createProduct(product);
         Map<String, Object> result = new HashMap<>();
+        result.put("statusCode", "201");
         result.put("message", "CREATE_DONE");
         return ResponseEntity.ok().body(result);
     }
@@ -55,8 +56,8 @@ public class ProductController {
     public ResponseEntity<Map<String, Object>> findById(@RequestParam("name")String name){
         List<ProductDTO> productList = productService.findByName(name);
         Map<String, Object> result = new HashMap<>();
+        result.put("statusCode", "200");
         result.put("data", productList);
-
         return ResponseEntity.ok().body(result);
     }
 
@@ -65,9 +66,8 @@ public class ProductController {
     public ResponseEntity<Map<String, Object>> findProductByFilter(@RequestBody HashMap<String, Object> param){
         List<ProductFilterDTO> productList = productService.findProductByFilter(param);
         Map<String, Object> result = new HashMap<>();
+        result.put("statusCode", "200");
         result.put("data", productList);
         return ResponseEntity.ok().body(result);
     }
-
-
 }

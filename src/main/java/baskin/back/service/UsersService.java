@@ -4,7 +4,9 @@ package baskin.back.service;
 import baskin.back.CustomException;
 import baskin.back.domain.Users;
 import baskin.back.repository.UsersRepository;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.mindrot.jbcrypt.BCrypt;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -45,8 +47,24 @@ public class UsersService {
     }
 
     public List<Users> findAll() {
-        return usersRepository.findAll();
+        List<Users> userList = usersRepository.findAll();
+        if (userList.isEmpty()){
+            throw new CustomException(InvalidParameter);
+        }
+        return userList;
     }
+
+    public void deleteUser(Users users){
+        Users user = usersRepository.existUser(users.getUserid());
+        if(user == null){
+            throw new CustomException(DoNotExistIdException);
+        } else if(!checkPass(users.getUserpw(), user.getUserpw())){
+            throw new CustomException(DoNotMatchPasswordException);
+        } else {
+            usersRepository.deleteUser(users.getUserid());
+        }
+    }
+
 
 
     // 비밀번호 암호화
