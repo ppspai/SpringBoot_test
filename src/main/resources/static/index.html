@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- metas -->
+    <meta charset="utf-8">
+    <meta name="author" content="Chitrakoot Web" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Pet Adoption, Care and Shop Responsive Template" />
+    <meta name="description" content="Paw - Pet Adoption, Care and Shop Responsive Template" />
+
+    <!-- title  -->
+    <title>베스킨라빈스</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/img/logos/window_icon.png" />
+    <link rel="apple-touch-icon" href="/img/logos/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/logos/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/logos/apple-touch-icon-114x114.png" />
+
+    <!-- plugins -->
+    <link rel="stylesheet" href="../css/plugins.css" />
+
+    <!-- revolution slider css -->
+    <link rel="stylesheet" href="../css/rev_slider/settings.css">
+    <link rel="stylesheet" href="../css/rev_slider/layers.css">
+    <link rel="stylesheet" href="../css/rev_slider/navigation.css">
+
+    <!-- search css -->
+    <link rel="stylesheet" href="../search/search.css" />
+
+    <!-- core style css -->
+    <link href="../css/styles.css" rel="stylesheet" />
+
+     <!-- jquery -->
+     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {  
+
+            //유저 로그인 세션값 유뮤에 따라 상단바 메뉴가 달라집니다. 
+            $('#userMenu').hide();
+            $('#adminSessionView').hide();
+            
+
+            // 여기서 세션값 유무를 판단해줄거예요
+
+            // // 테스트용 세션
+            // var userIdSession = 'aaa';
+            // localStorage.setItem('sessionIdTest', userIdSession);
+
+            // 실제 세션
+            if(localStorage.getItem("userid") != null){
+                userIdSession = localStorage.getItem("userid");
+            };
+            
+            
+           if(userIdSession == 'admin'){        //관리자 아이디일때
+                $('#noSessionView').hide();
+                $('#userMenu').hide();
+                $('#adminSessionView').show();
+            }else if(userIdSession !== null){   //아이디 세션이 있을 때
+                $('#noSessionView').hide();
+                $('#userMenu').show();
+                $('#adminSessionView').hide();
+                $('#sessionId').html(userIdSession+'님 환영합니다.')
+            }else{                              
+                $('#noSessionView').show();     //아이디 세션이 없을 때
+                $('#userMenu').hide();
+                $('#adminSessionView').hide();
+            };
+
+            //회원 탈퇴 버튼 눌렀을 때
+            $("#quitButton").click(function(){
+
+                prompt('비밀번호를 입력하세요');
+
+            }); 
+
+        });
+
+
+        
+
+
+
+	</script>
+</head>
+
+
+
+<body>
+
+    <!-- start page loading -->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- end page loading -->
+
+    <!-- start main-wrapper section -->
+    <div class="main-wrapper">
+
+        <!-- start header section -->
+        <header>
+
+            <div id="top-bar" class="top-bar" style="background-color:rgb(242, 108, 132);">
+                <div class="container lg-container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="top-bar-info">
+                                <ul>
+                                    <!-- 로그인한 유저 이름 -->
+                                    <li><span style="margin-left: 20px; font-weight: bold;" id="sessionId">TEL : 080-555-3131 </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-3 xs-display-none">
+                            <ul class="top-social-icon">
+                                <li><span style="color: white; font-weight: bold;">TEL : 080-555-3131 </span></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-default border-bottom border-color-light-white">
+
+                <!-- start top search -->
+                <div class="top-search bg-theme">
+                    <div class="container lg-container">
+                        <form class="search-form" action="search.html" method="GET" accept-charset="utf-8">
+                            <div class="input-group">
+                                <span class="input-group-addon cursor-pointer">
+                                    <button class="search-form_submit fas fa-search font-size18 text-white" type="submit"></button>
+                                </span>
+                                <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
+                                <span class="input-group-addon close-search"><i class="fas fa-times font-size18 line-height-28 margin-5px-top"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end top search -->
+
+                <div class="container lg-container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-12">
+                            <div class="menu_area alt-font">
+                                <nav class="navbar navbar-expand-lg navbar-light no-padding">
+
+                                    <!-- 여기서 if문으로 userIdSession값 유무에따라 다른 버튼을 보여줄거예요 -->
+                                    <div id="noSessionView" style="margin-right: 50px;">
+                                        <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                            <li><a href="login.html">Login</a></li>
+                                            <li><a href="join.html">Join</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="adminSessionView" style="margin-right: 50px;">
+                                        <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                            <li><a href="logout.html">Logout</a></li>
+                                            <li><a href="userInfo.html">관리자 메뉴</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="userMenu" style="margin-right: 50px;">
+                                        <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                            <li><a href="#">MyPage</a>
+                                                <ul>
+                                                    <li><a href="update.html">회원 정보 수정</a></li>
+                                                    <li><a id="quitButton" href="#">회원 탈퇴</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="logout.html">Logout</a></li>
+                                        </ul>
+                                    </div>
+                            
+
+                                    <div style="margin-left: 180px;" class="navbar-header navbar-header-custom">
+                                        <!-- start logo -->
+                                        <a href="index.html" class="navbar-brand"><img id="logo" src="img/logos/baskin_robbins_long_logo.png" alt="logo"></a>
+                                        <!-- end logo -->
+                                    </div>
+
+                                    <div class="navbar-toggler"></div>
+
+                                    <!-- menu area -->
+                                    <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                        
+                                        <li><a href="#">MENU</a>
+                                            <ul>
+                                                <li><a href="icecream.html">아이스크림</a></li>
+                                                <li><a href="beverage.html">음료</a></li>
+                                                <li><a href="dessert.html">디저트</a></li>
+
+                                            </ul>
+                                        </li>
+                                        
+                                        <li><a href="#">성분 및 알레르기</a>
+                                            <ul>
+                                                <li><a href="searchAllergy.html">아이스크림</a></li>
+                                                <li><a href="searchAllergy2.html">음료</a></li>
+                                            </ul>
+                                        </li>
+                                       
+                                        <li><a href="#">STORE</a>
+                                            <ul>
+                                                <li><a href="location.html">매장 찾기</a></li>
+                                                <li><a href="service.html">고객 센터</a></li>
+                                            </ul>
+                                        </li>
+                                       
+                                        
+                                        
+                                    </ul>
+                                    <!-- end menu area -->
+
+                                    <!-- start atribute navigation -->
+                                    <div class="attr-nav sm-no-margin sm-margin-70px-right xs-margin-65px-right">
+                                        <ul>
+                                            <li class="dropdown sm-margin-20px-right">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    <span class="badge bg-theme">3</span>
+                                                </a>
+                                                <ul class="dropdown-menu cart-list">
+                                                    <li>
+                                                        <a href="#" class="photo"><img src="img/shop/cart-thumb01.jpg" class="cart-thumb" alt="" /></a>
+                                                        <h6><a href="#">Meats biscuits </a></h6>
+                                                        <p>2x - <span class="price">$99.99</span></p>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="photo"><img src="img/shop/cart-thumb02.jpg" class="cart-thumb" alt="" /></a>
+                                                        <h6><a href="#">Dog toys</a></h6>
+                                                        <p>1x - <span class="price">$33.33</span></p>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="photo"><img src="img/shop/cart-thumb03.jpg" class="cart-thumb" alt="" /></a>
+                                                        <h6><a href="#">Fancy collar</a></h6>
+                                                        <p>2x - <span class="price">$99.99</span></p>
+                                                    </li>
+                                                    <li class="total bg-theme">
+                                                        <span class="pull-left"><strong>Total</strong>: $233.31</span>
+                                                        <a href="#" class="butn small btn-cart white"><span>View Cart</span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="search"><a href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- end atribute navigation -->
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <!-- end header section -->
+
+        <!-- start banner-->
+        <div class="rev_slider_wrapper fullscreen custom-controls">
+            <div id="rev_slider_1" class="rev_slider fullscreenbanner" style="display: none;" data-version="5.4.5">
+                <ul>
+                    <li data-transition="fade">
+                        <img src="../img/banner/banner1.jpg" alt="slide6" class="rev-slidebg">
+                        
+                        <div style="margin-left: 550px; margin-top:200px; -webkit-text-fill-color: rgb(255, 230, 105);" class="tp-caption alt-font font-weight-700 text-white" data-x="30" data-y="center" data-voffset="[-100,-100,-130,-140]" data-fontsize="[58,48,36,32]" data-lineheight="[60,52,40,36]" data-width="[700, 700, 500, 300]" data-whitespace="[normal, normal, normal, normal]" data-frames='[{
+                            "delay":0,
+                            "split":"chars",
+                            "splitdelay":0.05,
+                            "speed":2000,
+                            "frame":"0",
+                            "from":"y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;",
+                            "mask":"x:0px;y:0px;s:inherit;e:inherit;",
+                            "to":"o:1;",
+                            "ease":"Power4.easeInOut"
+                            },{
+                            "delay":"wait",
+                            "speed":300,
+                            "frame":"999",
+                            "to":"auto:auto;",
+                            "ease":"Power3.easeInOut"}]' data-splitout="none">#벅스버니버니당근당근
+                        </div>
+                    
+                    </li>
+
+                    <li data-transition="fade">
+                        <img src="../img/banner/banner2.jpg" alt="slide2" class="rev-slidebg">
+                    </li>
+
+                    <li data-transition="fade">
+                        <img src="../img/banner/banner3.jpg" alt="slide3" class="rev-slidebg">
+                        <div style="margin-left: 530px; margin-top:230px; -webkit-text-fill-color: white;" class="tp-caption alt-font font-weight-700 text-white" data-x="30" data-y="center" data-voffset="[-100,-100,-130,-140]" data-fontsize="[58,48,36,32]" data-lineheight="[60,52,40,36]" data-width="[700, 700, 500, 300]" data-whitespace="[normal, normal, normal, normal]" data-frames='[{
+                            "delay":0,
+                            "split":"chars",
+                            "splitdelay":0.05,
+                            "speed":2000,
+                            "frame":"0",
+                            "from":"y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;",
+                            "mask":"x:0px;y:0px;s:inherit;e:inherit;",
+                            "to":"o:1;",
+                            "ease":"Power4.easeInOut"
+                            },{
+                            "delay":"wait",
+                            "speed":300,
+                            "frame":"999",
+                            "to":"auto:auto;",
+                            "ease":"Power3.easeInOut"}]' data-splitout="none"><p style="text-align:center; ">베스킨라빈스</p>
+                            <p style="text-align:center; margin-top: 10px; ">특별한 제휴혜택</p>
+                        </div>
+                    
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- end banner-->
+
+        <!-- start categories section -->
+        <section class="no-padding-bottom">
+            <div class="container lg-container">
+                <div class="row">
+                    <div class="col-md-3 xs-margin-40px-bottom">
+                        <div class="text-center">
+                            <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="../img/banner/add1.jpg" class="border-radius-5" alt="" /></a>
+                            <div style="margin-top: 10px;">
+                                <span class="type">
+                                    <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="http://www.baskinrobbins.co.kr/assets/images/event/stit_store.gif" alt="STORE EVENT"></a>
+                                </span>
+                                <br>
+                                <div>
+                                    <p>해피오더 딜리버리로 간편하고 빠르게 주문하세요!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 xs-margin-40px-bottom">
+                        <div class="text-center">
+                            <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="../img/banner/add2.jpg" class="border-radius-5" alt="" /></a>
+                            <div style="margin-top: 10px;">
+                                <span class="type">
+                                    <img src="http://www.baskinrobbins.co.kr/assets/images/event/stit_store.gif" alt="STORE EVENT">
+                                </span>
+                                <br>
+                                <div>
+                                    <p>배민에서 빠르게 주문하세요!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 xs-margin-40px-bottom" >
+                        <div class="text-center">
+                            <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="../img/banner/add3.jpg" class="border-radius-5" alt="" /></a>
+                            <div style="margin-top: 10px;">
+                                <span class="type">
+                                    <img src="http://www.baskinrobbins.co.kr/assets/images/event/stit_store.gif" alt="STORE EVENT">
+                                </span>
+                                <br>
+                                <div>
+                                    <p>요기요에서 손쉽게 주문하세요!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 xs-margin-40px-bottom">
+                        <div class="text-center">
+                            <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="../img/banner/add4.jpg" class="border-radius-5" alt="" /></a>
+                            <div style="margin-top: 10px;">
+                                <span class="type">
+                                    <a href="http://www.baskinrobbins.co.kr/store/catering.php"><img src="http://www.baskinrobbins.co.kr/assets/images/event/stit_store.gif" alt="STORE EVENT"></a>
+                                </span>
+                                <br>
+                                <div>
+                                    <p>카카오톡으로 편리하게 주문하세요!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end categories section -->
+
+        
+
+        <!-- start extra section -->
+        <section class="bg-theme bg-img theme-overlay" data-overlay-dark="97" data-background="../img/bg/pattern.png">
+            <div class="container">
+                <div class="text-center">
+                    <h3 class="text-white font-size80 sm-font-size50 xs-font-size40 no-margin-bottom">SCOOP SPOON</h3>
+                    <h5 class="text-white font-size40 sm-font-size30 xs-font-size26 margin-20px-bottom sm-margin-10px-bottom">A fresh approach to shopping</h5>
+                    <p class="text-white font-size20 sm-font-size18 xs-font-size16 margin-30px-bottom sm-margin-20px-bottom xs-margin-10px-bottom line-height-35 xs-line-height-30 width-75 sm-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    <a href="javascript:void(0);" class="butn medium">Read more</a>
+                </div>
+            </div>
+        </section>
+        <!-- end extra section -->
+
+        
+
+        <!-- start extra section -->
+        <div style="margin-top: 50px; margin-bottom: 100px;" class="subscribe-paw text-center">
+            <a href="location.html"><img src="../img/banner/bottom_banner.jpg" alt="" /></a>
+        </div>
+        <!-- end extra section -->
+
+        
+
+        <!-- start subscribe section -->
+        <!-- <div class="subscribe-paw text-center">
+            <img src="img/content/04.png" alt="" />
+        </div> -->
+        <div class="footer-icon bg-light-gray padding-60px-bottom padding-90px-top xs-padding-70px-top xs-padding-50px-bottom mobile-padding-50px-tb margin-5px-bottom">
+            <div class="container lg-container">
+                <div class="d-flex xs-display-inherit xs-text-center justify-content-between align-items-center">
+                    <div class="xs-margin-30px-bottom">
+                        <img src="../img/logos/baskin_robbins_logo.png" class="width-70 xs-width-auto" alt="" />
+                    </div>
+                    <div>
+                        <ul class="social-icon-style1">
+                            <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-youtube"></i></a></li>
+                            <!-- <li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end subscribe section -->
+
+        <!-- start footer section -->
+        <footer>
+            <div class="container lg-container">
+                <div class="row margin-80px-bottom md-margin-50px-bottom sm-margin-40px-bottom">
+
+                    <div class="col-lg-2 col-sm-6 col-12 sm-margin-30px-bottom">
+                        <h3>Explore</h3>
+                        <div>
+                            <ul class="footer-list">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="javascript:void(0)">Services</a></li>
+                                <li><a href="#">Our Team</a></li>
+                                <li><a href="javascript:void(0)">Adopt Pet</a></li>
+                                <li><a href="#">Gallery</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 col-12 sm-margin-30px-bottom">
+                        <h3>Links</h3>
+                        <div>
+                            <ul class="footer-list">
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="javascript:void(0)">Help</a></li>
+                                <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                                <li><a href="javascript:void(0)">Terms of Use</a></li>
+                                <li><a href="javascript:void(0)">Site Map</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12 sm-margin-30px-bottom">
+                        <h3>Contact</h3>
+                        <ul class="list-style-1 no-margin-bottom">
+                            <li class="d-flex"><span class="fas fa-map-marker-alt"></span> 74 Guild Street 542B, Town MT.</li>
+                            <li class="d-flex"><span class="fas fa-at"></span>
+                                <a href="javascript:void(0)" class="text-extra-light-gray">addyour@emailhere</a>
+                            </li>
+                            <li class="d-flex"><span class="fas fa-phone"></span>
+                                <a href="javascript:void(0)" class="text-extra-light-gray">(+44) 123 456 789</a>
+                            </li>
+                            <li class="d-flex"><span class="fas fa-globe"></span>
+                                <a href="javascript:void(0)" class="text-extra-light-gray">addyourwebsite</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5 col-sm-6 col-12">
+                        <h3>About</h3>
+                        <p class="margin-30px-bottom">Etiam rhoncu sit amet adip scing simply thin sed ipsum dolor sit amet adip dine scing not avilable in the martket lorem ipsum sem neque.</p>
+                        <div class="newsletter">
+                            <input type="email" placeholder="Enter your email...">
+                            <a href="javascript:void(0)" class="butn subscribe"><span>Subscribe</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="padding-20px-tb border-top border-color-light-black">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="xs-font-size13 no-margin-bottom text-extra-light-gray sm-text-center">&copy; 2020 Paw is Powered by Chitrakoot Web</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end footer section -->
+
+    </div>
+    <!-- end main-wrapper section -->
+
+    <!-- start scroll to top -->
+    <a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-paw" aria-hidden="true"></i></a>
+    <!-- end scroll to top -->
+
+    <!-- all js include start -->
+
+    <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- modernizr js -->
+    <script src="../js/modernizr.js"></script>
+
+    <!-- bootstrap -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Serch -->
+    <script src="../search/search.js"></script>
+
+    <!-- navigation -->
+    <script src="../js/nav-menu.js"></script>
+
+    <!-- tab -->
+    <script src="../js/easy.responsive.tabs.js"></script>
+
+    <!-- owl carousel -->
+    <script src="../js/owl.carousel.min.js"></script>
+
+    <!-- jquery.counterup.min -->
+    <script src="../js/jquery.counterup.min.js"></script>
+
+    <!-- jquery.counterdown.min -->
+    <script src="../js/countdown.js"></script>
+
+    <!-- datepicker -->
+    <script src="../js/datepicker.min.js"></script>
+
+    <!-- stellar js -->
+    <script src="../js/jquery.stellar.min.js"></script>
+
+    <!-- waypoints js -->
+    <script src="../js/waypoints.min.js"></script>
+
+    <!-- jquery.magnific-popup js -->
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+
+    <!-- isotope.pkgd.min js -->
+    <script src="../js/isotope.pkgd.min.js"></script>
+
+    <!-- revolution slider js files start -->
+    <script src="../js/rev_slider/jquery.themepunch.tools.min.js"></script>
+    <script src="../js/rev_slider/jquery.themepunch.revolution.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.actions.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.migration.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="../js/rev_slider/extensions/revolution.extension.video.min.js"></script>
+    <!-- revolution slider js files end -->
+
+    <!-- custom scripts -->
+    <script src="../js/main.js"></script>
+
+    <!-- all js include end -->
+
+</body>
+
+</html>

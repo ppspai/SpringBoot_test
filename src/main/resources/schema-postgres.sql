@@ -47,5 +47,5 @@ CREATE TABLE IF NOT EXISTS Users(
     userpw VARCHAR(100),
     birth INTEGER,
     email VARCHAR(50),
-    phoneNumber VARCHAR(11)
+    phonenumber VARCHAR(11)
 );

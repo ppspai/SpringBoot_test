@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://www.baskinrobbins.co.kr/menu/view.php?seq=1167 -->
+<html lang="ko">
+<head>
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<script>
+
+	$(document).ready(function () {  
+
+		// 테스트용 세션
+		var userIdSession = 'admin';
+
+		$('#adminMenuList').hide();
+
+		// //실제 세션
+		// if(localStorage.getItem("sessionId") != null){  
+        //     userIdSession = localStorage.getItem("sessionId");
+        // }; 
+
+		if(userIdSession == 'admin'){        //관리자 아이디일때
+			$('#adminMenuList').show();
+        }else{
+			$('#adminMenuList').hide();
+		}
+
+	});
+
+</script>
+
+
+<title>배스킨라빈스</title>
+<!-- metas -->
+<meta charset="utf-8">
+<meta name="author" content="Chitrakoot Web" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Pet Adoption, Care and Shop Responsive Template" />
+<meta name="description" content="Paw - Pet Adoption, Care and Shop Responsive Template" />
+<meta property="og:url" content="http://www.baskinrobbins.co.kr">
+<meta property="og:image" content="http://www.baskinrobbins.co.kr/assets/images/common/img_br_sns.png">
+
+<!-- title  -->
+<title>베스킨라빈스</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="img/logos/window_icon.png" />
+<link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="img/logos/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="img/logos/apple-touch-icon-114x114.png" />
+
+<!-- plugins -->
+<link rel="stylesheet" href="css/plugins.css" />
+<link rel="stylesheet" href="css/baskinrobbins.css" />
+
+<!-- revolution slider css -->
+<link rel="stylesheet" href="css/rev_slider/settings.css">
+<link rel="stylesheet" href="css/rev_slider/layers.css">
+<link rel="stylesheet" href="css/rev_slider/navigation.css">
+
+<!-- search css -->
+<link rel="stylesheet" href="search/search.css" />
+
+<!-- core style css -->
+<link href="css/styles.css" rel="stylesheet" />
+</head>
+<body id="br_menu">
+
+<article id="wrap" class="br_menu_view">
+<!-- haeder -->
+	
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WWX8QVK"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
+	<header id="header">
+		<div id="top-bar" class="top-bar" style="background-color:rgb(242, 108, 132);">
+			<div class="container lg-container">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="top-bar-info">
+							<ul>
+								<li><i class="fas fa-phone"></i>TEL : 080-555-3131</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-3 xs-display-none">
+						<ul class="top-social-icon">
+							<li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a></li>
+							<li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="navbar-default border-bottom border-color-light-white">
+	
+			<!-- start top search -->
+			<div class="top-search bg-theme">
+				<div class="container lg-container">
+					<form class="search-form" action="search.html" method="GET" accept-charset="utf-8">
+						<div class="input-group">
+							<span class="input-group-addon cursor-pointer">
+								<button class="search-form_submit fas fa-search font-size18 text-white" type="submit"></button>
+							</span>
+							<input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
+							<span class="input-group-addon close-search"><i class="fas fa-times font-size18 line-height-28 margin-5px-top"></i></span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end top search -->
+	
+			<div class="container lg-container">
+				<div class="row align-items-center">
+					<div class="col-12 col-lg-12">
+						<div class="menu_area alt-font">
+							<nav class="navbar navbar-expand-lg navbar-light no-padding">
+	
+								<div style="margin-right: 50px;">
+									<ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+										<li><a href="login.html">Login</a></li>
+										<li><a href="#">Join</a></li>
+									</ul>
+								</div>
+								
+	
+								<div style="margin-left: 100px;" class="navbar-header navbar-header-custom">
+									<!-- start logo -->
+									<a href="index.html" class="navbar-brand"><img id="logo" src="img/logos/baskin_robbins_long_logo.png" alt="logo"></a>
+									<!-- end logo -->
+								</div>
+	
+								<div class="navbar-toggler"></div>
+	
+								<!-- menu area -->
+								<ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+									
+									<li><a href="#">MENU</a>
+										<ul>
+											<li><a href="icecream.html">아이스크림</a></li>
+										<li><a href="beverage.html">음료</a></li>
+										<li><a href="dessert.html">디저트</a></li>
+										</ul>
+									</li>
+									
+									<li><a href="#">성분 및 알레르기</a>
+										<ul>
+											<li><a href="portfolio.html">아이스크림</a></li>
+											<li><a href="portfolio-style-2.html">음료</a></li>
+										</ul>
+									</li>
+								   
+									<li><a href="#">STORE</a>
+										<ul>
+											<li><a href="shop-product-grid.html">매장 찾기</a></li>
+											<li><a href="product-grid-3-column.html">고객 센터</a></li>
+										</ul>
+									</li>
+									<li><a href="#">ABOUT</a>
+										<ul>
+											<li><a href="shop-product-grid.html">공지사항</a></li>
+											<li><a href="product-grid-3-column.html">보도자료</a></li>
+										</ul>
+									</li>
+									
+									
+								</ul>
+								<!-- end menu area -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+    <div id="content">
+        <div class="inner_content">
+            <div class="view_wrap">
+                <article class="view_product icecream">
+                    <!-- 아이스크림일 경우 클래스 icecream -->
+					<div id="product_info"></div>
+					<!--
+                    <header class="header">
+                        <h2 class="name">
+							<small>영어이름</small>
+							아이스크림 한글 이름
+						</h2>
+                        <p class="content">아이스크림 설명(description)</p>
+						<div class="photo">
+                            <img src="./img/"+img_url alt="">
+                        </div>
+						<div class="buy">
+							<a href="" target="_blank">구매하기</a>
+						</div>
+					</header>
+					-->
+					<script type="text/javascript">
+						var Request = function() {  
+						this.getParameter = function(name) {  
+							var rtnval = '';
+							var nowAddress = unescape(location.href);  
+							var parameters = (nowAddress.slice(nowAddress.indexOf('?') + 1,  
+									nowAddress.length)).split('&');  
+							for (var i = 0; i < parameters.length; i++) {  
+								var varName = parameters[i].split('=')[0];  
+								if (varName.toUpperCase() == name.toUpperCase()) {  
+									rtnval = parameters[i].split('=')[1];  
+									break;  
+								}  
+							}  
+							return rtnval;  
+						}  
+					}  
+					var request = new Request();
+						var name = decodeURI(decodeURIComponent(request.getParameter("name")));
+						if(name==""){
+							window.location.replace('index.html');
+						}
+						var en_name = decodeURI(decodeURIComponent(request.getParameter("en_name")));
+						var img_url = request.getParameter("img_url");
+						var des = decodeURI(decodeURIComponent(request.getParameter("description")));
+						var info = document.getElementById("product_info");
+						let code;
+				
+						code="<header class=\"header\"><h2 class=\"name\"><small>";
+						code+=en_name+"</small>"+name+"</h2><p class=\"content\">";
+						code+=des+"</p><div class=\"photo\"><img src=\"img/icecream/"+img_url+"\" alt=\"\">";
+						code+="</div><div class=\"buy\"><a href=\"\" target=\"_blank\">구매하기</a></div></header>"
+						info.innerHTML+=code;
+					</script>
+
+                    <!-- ###제품정보### -->
+                    <div class="prdinfo">
+                        <!-- SNS -->
+                        <div class="link">
+                            <p class="btn_store">
+                                <a href="http://www.baskinrobbins.co.kr/store/map.php?storechk=y" target="_blank"><img src="./img/btn_store.gif" alt="판매 매장 확인"></a></p>
+                            <div class="rig">
+                                <nav class="sns" style="margin-bottom: 30px;">
+                                    <ul>
+										<li id="adminMenuList">
+											<button id="updateButton" style="background-color: rgb(242, 108, 132); margin-bottom:70px; width: 130px; height: 50px;" type="button" class="butn no-margin-bottom">수정</button>
+											<button id="deleteButton" style="background-color: rgb(242, 108, 132); margin-bottom:70px; width: 130px; height: 50px;" type="button" class="butn no-margin-bottom">삭제</button>
+										</li>
+										<li>
+                                            <a href="http://www.baskinrobbins.co.kr/menu/view.php?seq=1167#none" role="button" data-sns="facebook">
+                                                <img src="img/icecream/icon_facebook.png" alt="FACEBOOK">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.baskinrobbins.co.kr/menu/view.php?seq=1167#none" role="button" data-sns="twitter">
+                                                <img src="img/icecream/icon_twitter.png" alt="TWITTER">
+                                            </a>
+                                        </li>
+										<li>
+                                            <a href="#" target="_blank">
+                                                <img src="img/icecream/icon_blog.png" alt="BLOG">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- //###제품정보### -->
+                </article>
+
+                    <article class="view_price">
+                        <section class="concup">
+                            <h2><img src="img/icecream/tit_concup.gif" alt="cone &amp; cup"></h2>
+                            <ul>
+                                <li class="c1">
+                                    <span>싱글레귤러</span>
+                                    한가지 맛을 센스있게<br>
+                                    즐길수 있는 사이즈<br>
+                                    (용기무게 제외 중량 115g)
+                                    <strong>3,500원</strong>
+                                </li>
+                                <li class="c2">
+                                    <span>싱글킹</span>
+                                    좋아하는 맛 한가지만 듬뿍 <br>
+                                    맛볼 수 있는 사이즈 (중량 145g)
+                                    <strong>4,300원</strong>
+                                </li>
+                                <li class="c3">
+                                    <span>더블주니어</span>
+                                    두가지 맛을 조금씩 한번에 <br>
+                                    즐기는 사이즈 (중량 150g)
+                                    <strong>4,700원</strong>
+                                </li>
+                                <li class="c4">
+                                    <span>더블레귤러</span>
+                                    아이스크림 매니아를 위한 <br>
+                                    진정한 더블 사이즈 (중량 230g)
+                                    <strong>6,700원</strong>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="handpack">
+                            <h2><img src="img/icecream/tit_handpack.gif" alt="hand pack"></h2>
+                            <ul>
+                                <li class="p1">
+                                    <span>파인트</span>
+                                    3가지 맛을 골라먹는 재미가 <br>
+                                    있는 사이즈 (중량 320g)
+                                    <strong>8,900원</strong>
+                                </li>
+                                <li class="p2">
+                                    <span>쿼터</span>
+                                    4가지 맛을 골라먹는 재미가<br>
+                                    있는 사이즈 (중량 620g)
+                                    <strong>17,000원</strong>
+                                </li>
+                                <li class="p3">
+                                    <span>패밀리</span>
+                                    5가지 맛을 나눠먹는 재미가<br>
+                                    있는 사이즈 (중량 960g)
+                                    <strong>24,000원</strong>
+                                </li>
+                                <li class="p4">
+                                    <span>하프갤런</span>
+                                    6가지 맛을 나눠먹는 재미가 <br>
+                                    있는 사이즈 (중량 1200g)
+                                    <strong>29,000원</strong>
+                                </li>
+                            </ul>
+                        </section>
+                    </article>
+                
+            </div>
+
+            <div class="btn_list top55"><!-- 2018-10-26 Modify -->
+                <a href="아이스크림 메인.html">목록</a>
+            </div>
+
+        </div>
+
+	<!-- footer -->
+	<!-- start footer section -->
+	<footer>
+		<div class="container lg-container">
+			<div class="row margin-80px-bottom md-margin-50px-bottom sm-margin-40px-bottom">
+
+				<div class="col-lg-2 col-sm-6 col-12 sm-margin-30px-bottom">
+					<h3>Explore</h3>
+					<div>
+						<ul class="footer-list">
+							<li><a href="about.html">About Us</a></li>
+							<li><a href="javascript:void(0)">Services</a></li>
+							<li><a href="team.html">Our Team</a></li>
+							<li><a href="javascript:void(0)">Adopt Pet</a></li>
+							<li><a href="portfolio.html">Gallery</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-6 col-12 sm-margin-30px-bottom">
+					<h3>Links</h3>
+					<div>
+						<ul class="footer-list">
+							<li><a href="faq.html">FAQs</a></li>
+							<li><a href="javascript:void(0)">Help</a></li>
+							<li><a href="javascript:void(0)">Privacy Policy</a></li>
+							<li><a href="javascript:void(0)">Terms of Use</a></li>
+							<li><a href="javascript:void(0)">Site Map</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6 col-12 sm-margin-30px-bottom">
+					<h3>Contact</h3>
+					<ul class="list-style-1 no-margin-bottom">
+						<li class="d-flex"><span class="fas fa-map-marker-alt"></span> 74 Guild Street 542B, Town MT.</li>
+						<li class="d-flex"><span class="fas fa-at"></span>
+							<a href="javascript:void(0)" class="text-extra-light-gray">addyour@emailhere</a>
+						</li>
+						<li class="d-flex"><span class="fas fa-phone"></span>
+							<a href="javascript:void(0)" class="text-extra-light-gray">(+44) 123 456 789</a>
+						</li>
+						<li class="d-flex"><span class="fas fa-globe"></span>
+							<a href="javascript:void(0)" class="text-extra-light-gray">addyourwebsite</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-5 col-sm-6 col-12">
+					<h3>About</h3>
+					<p class="margin-30px-bottom">Etiam rhoncu sit amet adip scing simply thin sed ipsum dolor sit amet adip dine scing not avilable in the martket lorem ipsum sem neque.</p>
+					<div class="newsletter">
+						<input type="email" placeholder="Enter your email...">
+						<a href="javascript:void(0)" class="butn subscribe"><span>Subscribe</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding-20px-tb border-top border-color-light-black">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p class="xs-font-size13 no-margin-bottom text-extra-light-gray sm-text-center">&copy; 2020 Paw is Powered by Chitrakoot Web</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- end footer section -->
+
+<input type="hidden" id="is_login" value="">
+</article>
+
+<!-- start scroll to top -->
+<a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-paw" aria-hidden="true"></i></a>
+<!-- end scroll to top -->
+
+<!-- all js include start -->
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- modernizr js -->
+    <script src="js/modernizr.js"></script>
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Serch -->
+    <script src="search/search.js"></script>
+    <!-- navigation -->
+    <script src="js/nav-menu.js"></script>
+    <!-- tab -->
+    <script src="js/easy.responsive.tabs.js"></script>
+    <!-- owl carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- jquery.counterup.min -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- jquery.counterdown.min -->
+    <script src="js/countdown.js"></script>
+    <!-- datepicker -->
+    <script src="js/datepicker.min.js"></script>
+    <!-- stellar js -->
+    <script src="js/jquery.stellar.min.js"></script>
+    <!-- waypoints js -->
+    <script src="js/waypoints.min.js"></script>
+    <!-- jquery.magnific-popup js -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- isotope.pkgd.min js -->
+    <script src="js/isotope.pkgd.min.js"></script>
+    <!-- revolution slider js files start -->
+    <script src="js/rev_slider/jquery.themepunch.tools.min.js"></script>
+    <script src="js/rev_slider/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.actions.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.migration.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.video.min.js"></script>
+    <!-- revolution slider js files end -->
+
+    <!-- custom scripts -->
+    <script src="js/main.js"></script>
+    <!-- all js include end -->
+
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","926241157723258");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=926241157723258&amp;ev=PageView&amp;noscript=1"></noscript>
+</body>
+</html>

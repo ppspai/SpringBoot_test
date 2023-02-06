@@ -1,0 +1,43 @@
+[
+    {
+        "ko_name": "아이스 가래떡 흑임자 우유",
+        "kcal" : "265",
+        "salt" : "138",
+        "sugar" : "27",
+        "fat" : "6",
+        "protein" : "6",
+        "caffine" : "0"
+
+    },
+    {
+        "ko_name": "아이스 모찌 흑임자",
+        "kcal" : "270",
+        "salt" : "97",
+        "sugar" : "22",
+        "fat" : "9",
+        "protein" : "5",
+        "caffine" : "0"
+
+    },
+    {
+        "ko_name": "아이스 가래떡 꿀고구마",
+        "kcal" : "270",
+        "salt" : "97",
+        "sugar" : "22",
+        "fat" : "9",
+        "protein" : "5",
+        "caffine" : "0"
+
+    },
+    {
+        "ko_name": "아이스 가래떡 우유",
+        "kcal" : "270",
+        "salt" : "97",
+        "sugar" : "22",
+        "fat" : "9",
+        "protein" : "5",
+        "caffine" : "0"
+
+    }
+
+]

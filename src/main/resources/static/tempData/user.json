@@ -1,0 +1,49 @@
+[
+    {
+        "id": 1,
+        "user_id":"aaaa",
+        "user_pw":"1234",
+        "name":"홍길동1",
+        "birth":"19900101",
+        "email":"aaa@aaa.com",
+        "phone_number":"010-0000-0000"
+    },
+    {
+        "id": 2,
+        "user_id":"bbbb",
+        "user_pw":"1234",
+        "name":"홍길동2",
+        "birth":"19900101",
+        "email":"aaa@aaa.com",
+        "phone_number":"010-0000-0000"
+    },
+    {
+        "id": 3,
+        "user_id":"cccc",
+        "user_pw":"1234",
+        "name":"홍길동3",
+        "birth":"19900101",
+        "email":"aaa@aaa.com",
+        "phone_number":"010-0000-0000"
+    },
+    {
+        "id": 4,
+        "user_id":"dddd",
+        "user_pw":"1234",
+        "name":"홍길동4",
+        "birth":"19900101",
+        "email":"aaa@aaa.com",
+        "phone_number":"010-0000-0000"
+    },
+    {
+        "id": 5,
+        "user_id":"eeee",
+        "user_pw":"1234",
+        "name":"홍길동5",
+        "birth":"19900101",
+        "email":"aaa@aaa.com",
+        "phone_number":"010-0000-0000"
+    }
+
+
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "ko_name": "벅스 버니버니 당근당근",
+        "kcal" : "261",
+        "salt" : "75",
+        "sugar" : "23",
+        "fat" : "7",
+        "protein" : "4",
+        "caffine" : "0"
+    },
+    {
+        "ko_name": "크림치즈아이스크림",
+        "kcal" : "244",
+        "salt" : "107",
+        "sugar" : "20",
+        "fat" : "7",
+        "protein" : "4",
+        "caffine" : "0"
+
+    },
+    {
+        "ko_name": "흑임자만났떡",
+        "kcal" : "270",
+        "salt" : "97",
+        "sugar" : "22",
+        "fat" : "9",
+        "protein" : "5",
+        "caffine" : "0"
+
+    },
+    {
+        "ko_name": "아이스허쉬앤리세스",
+        "kcal" : "288",
+        "salt" : "67",
+        "sugar" : "26",
+        "fat" : "10",
+        "protein" : "4",
+        "caffine" : "0"
+
+    }
+
+]

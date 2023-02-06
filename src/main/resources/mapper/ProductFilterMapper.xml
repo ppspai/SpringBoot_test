@@ -26,6 +26,9 @@
                     GROUP BY product.id) as allergy ON product.id = allergy.id
 
         <where>
+            <if test = "category_id != null">
+                AND product.category_id = #{category_id}
+            </if>
             <if test = "name != null">
                 <bind name="names" value="'%'+name+'%'"/>
                 AND product.name like #{names}

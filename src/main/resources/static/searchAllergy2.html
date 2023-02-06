@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+
+        $("#searchButton").click(function(){
+
+            //이건 선택된 product_type이 무엇인지 판단할게요 -> 아이스크림 / 음료 테이블 나눈경우임(제품 테이블 하나니까 필요없음)
+            //var productType = $('input[name="product_type"]:checked').val();
+
+            //이건 체크된 값이 여러개일때 배열로 담아줄 때 쓸거예요
+            var allergyArr = new Array();
+            $('input:checkbox[name=allergy]:checked').each(function() {
+                allergyArr.push(this.value);
+            });
+
+            var allergyStr = "";
+            for(var i = 0 ; i < allergyArr.length ; i++){
+                allergyStr += i == 0 ? allergyArr[0] : "," + allergyArr[i];
+            }
+
+            var columnTest = $("#inputProductColumn").val();
+            if(columnTest === "전체"){
+                columnTest = null;
+            } else if(columnTest === "열량"){
+                columnTest = "kcal";
+            } else if(columnTest === "나트륨"){
+                columnTest = "salt";
+            } else if(columnTest === "당류"){
+                columnTest = "sugar";
+            } else if(columnTest === "포화지방"){
+                columnTest = "fat";
+            } else if(columnTest === "단백질"){
+                columnTest = "protein";
+            } else {
+                columnTest = "caffeine";
+            };
+
+
+            var orderTest = $("#inputOrder").val();
+            if(orderTest==="전체"){
+                orderTest = null;
+            } else if (orderTest === "높은순") {
+                orderTest = "DESC";
+            } else {
+                orderTest = "ASC"
+            };
+
+            // json 형식으로 데이터 set
+            var filter = {
+                category_id  : 2
+                , name       : $("#inputProductName").val()
+                , column     : columnTest
+                , order      : orderTest
+                , allergy    : allergyStr
+            };
+
+            // ajax 통신
+            $.ajax({
+                type : "POST",
+                url : "/product/filter",
+                data : JSON.stringify(filter),
+                dataType : "JSON",
+                async    : true,
+                contentType : "application/json",
+                success : function(res){
+
+                    var tr =$("#tr");
+
+                    // 출력을 위해 변수에 넣어둔 값을 비워줘요
+                    tr.empty();
+                    tr.append(`
+                        <tr style="font-weight: bold; ">
+                                    <th>제품명</th>
+                                    <td>열량(kcal)</td>
+                                    <td>나트륨(mg)</td>
+                                    <td>당류(g)</td>
+                                    <td>포화지방(g)</td>
+                                    <td>단백질</td>
+                                    <td>카페인</td>
+                                    <td>알레르기 성분</td>
+                                </tr>
+                    `)
+
+                    res.data.forEach((product)=>{
+                        var allergy = product['allergy_name'];
+                        allergy = allergy.substring(1,allergy.length-1);
+
+                        tr.append(`
+                            <tr>
+                                <td><span> ${product['name']}</td>
+                                <td><span> ${product['kcal']}</td>
+                                <td><span> ${product['salt']}</td>
+                                <td><span> ${product['sugar']}</td>
+                                <td><span> ${product['fat']}</td>
+                                <td><span> ${product['protein']}</td>
+                                <td><span> ${product['caffeine']}</td>
+                                <td><span> ${allergy}</td>
+                            </tr>
+                            `)
+                    })
+                },
+                error : function(err){
+                    alert(err)
+                }
+            });
+        });
+    })
+
+    
+    function select(target){
+        const selected = document.getElementById("selected");
+        selected.innerText = target.innerText;
+    }
+    </script>
+
+    
+    <!-- metas -->
+    <meta charset="utf-8">
+    <meta name="author" content="Chitrakoot Web" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Pet Adoption, Care and Shop Responsive Template" />
+    <meta name="description" content="Paw - Pet Adoption, Care and Shop Responsive Template" />
+    
+    <!-- title  -->
+    <title>베스킨라빈스</title>
+    
+    <!-- favicon -->
+    <link rel="shortcut icon" href="img/logos/window_icon.png" />
+    <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/logos/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logos/apple-touch-icon-114x114.png" />
+    
+    <!-- plugins -->
+    <link rel="stylesheet" href="css/plugins.css" />
+    
+    <!-- revolution slider css -->
+    <link rel="stylesheet" href="css/rev_slider/settings.css">
+    <link rel="stylesheet" href="css/rev_slider/layers.css">
+    <link rel="stylesheet" href="css/rev_slider/navigation.css">
+
+    <!-- search css -->
+    <link rel="stylesheet" href="search/search.css" />
+
+    <!-- core style css -->
+    <link href="css/styles.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- start page loading -->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- end page loading -->
+
+    <!-- start main-wrapper section -->
+    <div class="main-wrapper">
+
+       <!-- start header section -->
+       <header>
+
+        <div id="top-bar" class="top-bar" style="background-color:rgb(242, 108, 132);">
+            <div class="container lg-container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="top-bar-info">
+                            <ul>
+                                <li><i class="fas fa-phone"></i>TEL : 080-555-3131</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3 xs-display-none">
+                        <ul class="top-social-icon">
+                            <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar-default border-bottom border-color-light-white">
+
+            <!-- start top search -->
+            <div class="top-search bg-theme">
+                <div class="container lg-container">
+                    <form class="search-form" action="search.html" method="GET" accept-charset="utf-8">
+                        <div class="input-group">
+                            <span class="input-group-addon cursor-pointer">
+                                <button class="search-form_submit fas fa-search font-size18 text-white" type="submit"></button>
+                            </span>
+                            <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
+                            <span class="input-group-addon close-search"><i class="fas fa-times font-size18 line-height-28 margin-5px-top"></i></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end top search -->
+
+            <div class="container lg-container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-12">
+                        <div class="menu_area alt-font">
+                            <nav class="navbar navbar-expand-lg navbar-light no-padding">
+
+                                <div style="margin-right: 50px;">
+                                    <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="join.html">Join</a></li>
+                                    </ul>
+                                </div>
+                                
+
+                                <div style="margin-left: 240px;" class="navbar-header navbar-header-custom">
+                                    <!-- start logo -->
+                                    <a href="index.html" class="navbar-brand"><img id="logo" src="img/logos/baskin_robbins_long_logo.png" alt="logo"></a>
+                                    <!-- end logo -->
+                                </div>
+
+                                <div class="navbar-toggler"></div>
+
+                                <!-- menu area -->
+                                <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                                    
+                                    <li><a href="#">MENU</a>
+                                        <ul>
+                                            <li><a href="demo-1.html">아이스크림</a></li>
+                                            <li><a href="demo-2.html">음료</a></li>
+                                            <li><a href="demo-3.html">디저트</a></li>
+
+                                        </ul>
+                                    </li>
+                                    
+                                    <li><a href="#">성분 및 알레르기</a>
+                                        <ul>
+                                            <li><a href="searchAllergy.html">아이스크림</a></li>
+                                            <li><a href="portfolio-style-2.html">음료</a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                    <li><a href="#">STORE</a>
+                                        <ul>
+                                            <li><a href="shop-product-grid.html">매장 찾기</a></li>
+                                            <li><a href="product-grid-3-column.html">고객 센터</a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                    
+                                    
+                                </ul>
+                                <!-- end menu area -->
+
+                                <!-- start atribute navigation -->
+                                <div class="attr-nav sm-no-margin sm-margin-70px-right xs-margin-65px-right">
+                                    <ul>
+                                        <li class="dropdown sm-margin-20px-right">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                <span class="badge bg-theme">3</span>
+                                            </a>
+                                            <ul class="dropdown-menu cart-list">
+                                                <li>
+                                                    <a href="#" class="photo"><img src="img/shop/cart-thumb01.jpg" class="cart-thumb" alt="" /></a>
+                                                    <h6><a href="#">Meats biscuits </a></h6>
+                                                    <p>2x - <span class="price">$99.99</span></p>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="photo"><img src="img/shop/cart-thumb02.jpg" class="cart-thumb" alt="" /></a>
+                                                    <h6><a href="#">Dog toys</a></h6>
+                                                    <p>1x - <span class="price">$33.33</span></p>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="photo"><img src="img/shop/cart-thumb03.jpg" class="cart-thumb" alt="" /></a>
+                                                    <h6><a href="#">Fancy collar</a></h6>
+                                                    <p>2x - <span class="price">$99.99</span></p>
+                                                </li>
+                                                <li class="total bg-theme">
+                                                    <span class="pull-left"><strong>Total</strong>: $233.31</span>
+                                                    <a href="#" class="butn small btn-cart white"><span>View Cart</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="search"><a href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- end atribute navigation -->
+
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- end header section -->
+        
+        <div style="margin-top: 100px; margin-right: 50px;">
+            <h3 style="-webkit-text-fill-color: rgba(32, 30, 30, 0.856);" class="text-white text-center margin-10px-bottom">영양정보</h3>
+            <p style="-webkit-text-fill-color: rgb(242, 108, 132);" class="text-white text-center opacity8 width-75 xs-width-100 center-col margin-30px-bottom"><b>
+                베스킨 라빈스 제품의 영양정보를 확인해보세요</p>
+            </b>
+        </div>
+
+       
+
+        <!-- 성분 검색 화면 start -->
+        <div style="margin-top: 40px; margin-bottom: 60px; text-align: center;" class="container lg-container" > 
+            <div class="row align-items-center">
+                <div class="col-lg-11 sm-margin-30px-bottom">
+                    <div style="background-color: rgb(255, 255, 255); border: 1px solid; border-color: rgb(201, 201, 201);"  class="bg-theme padding-40px-all height-100 width-100 border-radius-10">
+                        
+                        <!--<form method="post" action="#!"> --> 
+                            <input type="hidden" name="form-type" value="contact">
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-11">
+                                    
+
+                                    <div class="row">
+                                        
+                                        <div class="col-5">
+                                            <div class="row">
+                                                
+                                                <div class="col-3" style="margin-left: 30px;">
+                                                    <span><b>제품명 </b></span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <!-- 여기서 상품 이름으로 검색받을거예요 name="ko_name" -->
+                                                    <input type="text" class="border-radius-5" id="inputProductName" name="inputProductName" placeholder="상품명을 입력하세요">
+                                                    <!-- 여기서 제품 타입을 정해줄거예요 / 되는거 확인했으니 일단 주석 처리 -->
+                                                    <!-- <div style="margin-top: 30px;">
+                                                        <input type="radio" name="product_type" value="icecream">
+                                                        <label for="iceCreamRadio">아이스크림</label>
+                                                        <input type="radio" name="product_type" value="drink" style="margin-left: 30px;">
+                                                        <label for="drinkRadio">음료</label>
+                                                    </div> <br> -->
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-7">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <span><b>영양성분 </b></span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <select id="inputProductColumn">
+                                                                <option>전체</option>                                                        
+                                                                <option>열량</option>                                                        
+                                                                <option>나트륨</option>                                                        
+                                                                <option>당류</option>                                                        
+                                                                <option>포화지방</option>                                                        
+                                                                <option>단백질</option>                                                        
+                                                                <option>카페인</option>                                                        
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <select id="inputOrder">
+                                                                <option>전체</option>                                                        
+                                                                <option>높은순</option>                                                        
+                                                                <option>낮은순</option>                                                        
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    
+
+                                                    
+                                                </div>
+
+                                            </div>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                
+                                <!-- 여기서는 알레르기 성분으로 검색할거예요 check box name="allergy" -->
+                                <div style="margin-left: 50px; margin-top: 30px;">
+                                    <span><b>알레르기 </b></span>
+                                    <input value="계란" name="allergy" type="checkbox"> 계란
+                                    <input value="대두" name="allergy" type="checkbox"> 대두
+                                    <input value="땅콩" name="allergy" type="checkbox"> 땅콩
+                                    <input value="밀" name="allergy" type="checkbox"> 밀
+                                    <input value="우유" name="allergy" type="checkbox"> 우유
+                                    <input value="호두" name="allergy" type="checkbox"> 호두
+                                    <input value="쇠고기" name="allergy" type="checkbox"> 쇠고기
+                                </div>
+                                
+                                <div style="text-align: left; margin-left: 50px; font-size: 12px;">
+                                    <p>※ 모든 제품은 밀, 대두, 호두, 우유, 땅콩, 돼지고기, 복숭아, 계란, 쇠고기를 사용한 제품과 같은 제조 시설에서 제조되었습니다. <br>
+                                    ※ 어린이, 임산부 및 카페인에 민감한 사람은 섭취에 주의해 주시기 바랍니다. (고카페인 함유) <br>
+                                    ※ 카페인 함량 "-"은 해당없음을 의미합니다.</p>
+                                </div>
+
+                                <!-- 이 버튼을 누르면 productList에 해당하는 결과가 나오게 할거예요 -->
+                                <div style="text-align: center;" class="mfControls col-md-12">
+                                    <button id="searchButton" style="background-color: rgb(242, 108, 132); margin-top: 15px;" type="button" class="butn no-margin-bottom">검색</button>
+                                </div>
+                            </div>
+                        <!-- </form> -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- 성분 검색 화면 end -->
+
+        <!-- 성분 검색 결과 화면 start -->
+        
+        <hr>
+
+        <!-- 에이젝스 테스트용 임시 출력 화면 Start -->
+        <div style="margin-left: 400px;" id="productList"></div>
+        <h1 id="selected"></h1>
+        <!-- 에이젝스 테스트용 임시 출력 화면 End -->
+        
+        <hr>
+
+        <!-- 성분 검색 결과 화면 start -->
+        <div style="margin-top: 40px; margin-bottom: 60px; text-align: center;" class="container lg-container" > 
+            <div class="row align-items-center">
+                <div class="col-lg-11 sm-margin-30px-bottom">
+                    <div style="background-color: rgb(255, 255, 255); border: 1px solid; border-color: rgb(201, 201, 201);"  class="bg-theme padding-40px-all height-100 width-100 border-radius-10">
+                        
+                        <div style="margin-top: 10px;">
+                            <h3 style="-webkit-text-fill-color: rgba(32, 30, 30, 0.856);" class="text-white text-center margin-10px-bottom">SEARCH RESULT</h3>
+                            <p style="-webkit-text-fill-color: rgb(242, 108, 132);" class="text-white text-center opacity8 width-75 xs-width-100 center-col margin-30px-bottom"><b>
+                                검색결과 총 n건</p>
+                            </b>
+                            
+                        </div>
+
+                        <div class="col-12 shop-cart-table">
+                            <table class="table shop-cart text-center" id = "tr">
+                                <tr style="font-weight: bold; "> 
+                                    <th>제품명</th>
+                                    <td>열량(kcal)</td>
+                                    <td>나트륨(mg)</td>
+                                    <td>당류(g)</td>
+                                    <td>포화지방(g)</td>
+                                    <td>단백질</td>
+                                    <td>카페인</td>
+                                     <!-- <td>알레르기 성분</td>  -->
+                                </tr>
+                                
+                                <!-- ajax로 tr을 추가해줄거라 칼럼 tr만 있으면 됩니다! -->
+
+                            </table>
+
+                            
+                
+                        </div>
+
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- 성분 검색 화면 end -->
+
+    </div>
+    <!-- end main-wrapper section -->
+
+    <!-- start scroll to top -->
+    <a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-paw" aria-hidden="true"></i></a>
+    <!-- end scroll to top -->
+
+    <!-- all js include start -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- modernizr js -->
+    <script src="js/modernizr.js"></script>
+
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Serch -->
+    <script src="search/search.js"></script>
+
+    <!-- navigation -->
+    <script src="js/nav-menu.js"></script>
+
+    <!-- tab -->
+    <script src="js/easy.responsive.tabs.js"></script>
+
+    <!-- owl carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+
+    <!-- jquery.counterup.min -->
+    <script src="js/jquery.counterup.min.js"></script>
+
+    <!-- jquery.counterdown.min -->
+    <script src="js/countdown.js"></script>
+
+    <!-- datepicker -->
+    <script src="js/datepicker.min.js"></script>
+
+    <!-- stellar js -->
+    <script src="js/jquery.stellar.min.js"></script>
+
+    <!-- waypoints js -->
+    <script src="js/waypoints.min.js"></script>
+
+    <!-- jquery.magnific-popup js -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    <!-- isotope.pkgd.min js -->
+    <script src="js/isotope.pkgd.min.js"></script>
+
+    <!-- revolution slider js files start -->
+    <script src="js/rev_slider/jquery.themepunch.tools.min.js"></script>
+    <script src="js/rev_slider/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.actions.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.migration.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="js/rev_slider/extensions/revolution.extension.video.min.js"></script>
+    <!-- revolution slider js files end -->
+
+    <!-- custom scripts -->
+    <script src="js/main.js"></script>
+
+    <!-- all js include end -->
+
+</body>
+
+</html>

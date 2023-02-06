@@ -36,6 +36,6 @@ public class Users {
     @NotBlank
     private String email;
     @NotBlank
-    private String phoneNumber;
+    private String phonenumber;
 
 }
